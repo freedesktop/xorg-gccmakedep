@@ -1,0 +1,7 @@
+2005-12-08  Adam Jackson  <ajax@freedesktop.org>
+
+	* configure.ac:
+	* Makefile.am:
+	* cpprules.in:
+	* ChangeLog:
+	Bug #4807: Modularized gccmakedep (Joshua Baergen)
