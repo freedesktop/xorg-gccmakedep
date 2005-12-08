@@ -41,4 +41,4 @@ gccmakedep: gccmdep
 install-data-hook:
 	chmod +x $(DESTDIR)/$(bindir)/gccmakedep
 
-CLEANFILES = gccmakedep
+CLEANFILES = gccmakedep gccmdep
