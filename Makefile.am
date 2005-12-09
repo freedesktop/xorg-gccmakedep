@@ -22,8 +22,6 @@
 gccmakedep_DATA = gccmakedep
 gccmakedepdir = $(bindir)
 
-EXTRA_DIST = gccmdep.cpp
-
 include cpprules.in
 
 DEFS = \
@@ -34,11 +32,29 @@ DEFS = \
 
 CPP_FILES_FLAGS = $(DEFS)
 
-dist_man1_MANS = gccmakedep.man
-
 gccmakedep: gccmdep
-	mv gccmdep gccmakedep
+	cp gccmdep gccmakedep
 install-data-hook:
 	chmod +x $(DESTDIR)/$(bindir)/gccmakedep
 
-CLEANFILES = gccmakedep gccmdep
+appmandir = $(APP_MAN_DIR)
+
+appman_PRE = gccmakedep.man
+
+appman_DATA = $(appman_PRE:man=@APP_MAN_SUFFIX@)
+
+CLEANFILES = $(appman_DATA) gccmakedep gccmdep
+
+# Strings to replace in man pages
+XORGRELSTRING = @PACKAGE_STRING@
+  XORGMANNAME = X Version 11
+
+MAN_SUBSTS = \
+	-e 's|__vendorversion__|"$(XORGRELSTRING)" "$(XORGMANNAME)"|'
+
+SUFFIXES += .$(APP_MAN_SUFFIX) .man
+
+.man.$(APP_MAN_SUFFIX):
+	sed $(MAN_SUBSTS) < $< > $@
+
+EXTRA_DIST = $(appman_PRE) gccmdep.cpp
