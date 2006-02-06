@@ -1,6 +1,11 @@
 2006-02-06  Donnie Berkholz  <spyderous@gentoo.org>
 
 	* Makefile.am:
+	RM needed some more quoting.
+
+2006-02-06  Donnie Berkholz  <spyderous@gentoo.org>
+
+	* Makefile.am:
 	RM should be 'rm -f' for monolithic compatibility.
 
 2005-12-20  Kevin E. Martin  <kem-at-freedesktop-dot-org>
