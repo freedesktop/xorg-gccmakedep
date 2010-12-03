@@ -32,7 +32,9 @@ while [ $# != 0 ]; do
     else
 	case "$1" in
 	    -D*|-I*|-U*)
-		args="$args '$1'"
+XCOMM arg may contain single quotes
+		qarg=`echo "$1" | sed "s/'/'\\\\\\\\''/g"`
+                args="$args '$qarg'"
 		;;
 	    -g*|-O*)
 		;;
@@ -74,7 +76,8 @@ XCOMM ignore these flags
 			    echo "Unknown option '$1' ignored" 1>&2
 			    ;;
 			*)
-			    files="$files $1"
+XCOMM filename may contain blanks
+			    files="$files '$1'"
 			    ;;
 		    esac
 		fi
@@ -115,7 +118,8 @@ CMD="$CC -M $args $files"
 if [ X"$makefile" != X- ]; then
     CMD="$CMD >> $TMP"
 fi
-eval $CMD
+XCOMM Do not wildcard expand '*' in args
+eval "$CMD"
 if [ X"$makefile" != X- ]; then
     $RM ${makefile}.bak
     $MV $makefile ${makefile}.bak
