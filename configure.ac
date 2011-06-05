@@ -21,8 +21,13 @@ dnl  PERFORMANCE OF THIS SOFTWARE.
 dnl
 dnl Process this file with autoconf to create configure.
 
+# Initialize Autoconf
 AC_PREREQ([2.60])
-AC_INIT(gccmakedep,[1.0.2], [https://bugs.freedesktop.org/enter_bug.cgi?product=xorg],gccmakedep)
+AC_INIT([gccmakedep],[1.0.2],
+        [https://bugs.freedesktop.org/enter_bug.cgi?product=xorg],[gccmakedep])
+AC_CONFIG_SRCDIR([Makefile.am])
+
+# Initialize Automake
 AM_INIT_AUTOMAKE([foreign dist-bzip2])
 AM_MAINTAINER_MODE
 
